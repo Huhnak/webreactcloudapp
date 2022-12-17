@@ -1,18 +1,13 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import LoginForm from './Components/LoginForm';
-import Header from './Components/Header'
-import Files from './Components/Files'
-import './style.css'
+import './style.scss'
+import App from './App'
+import axios from 'axios';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+axios.defaults.withCredentials = true;
 root.render(
-  <div className='app'>
-    <Header/>
-    <LoginForm/>
-    <Files/>
-    <aside></aside>
-  </div>
+    <App/>
 );
 reportWebVitals();
