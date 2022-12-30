@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import config from '../axiosConfig';
+import GetDirectoriesTree from '../Handlers/Requests';
 
 class LoginForm extends React.Component{
     constructor(props) {
@@ -13,7 +14,7 @@ class LoginForm extends React.Component{
             password: '',
             isLoggined: false
         };
-    
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
@@ -34,10 +35,11 @@ class LoginForm extends React.Component{
             config.headers={
                 'Authorization':`Bearer ${response.data.jwtToken}`
             }
+            GetDirectoriesTree({setDirectoriesTree:this.props.setDirectoriesTree})
         }).catch((response)=>{alert("Wrong username or password" )})
 
         event.preventDefault();
-        
+
       }
     render(){
         return (!this.state.isLoggined && <form onSubmit={this.handleSubmit}>
