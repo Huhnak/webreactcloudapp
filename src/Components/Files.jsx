@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
+import store from '../Redux/store'
 import File from './File'
 
 const Files = (props) => {
     return(
         <div className='Files'>
-            {props.filteredDirectories.map(item => (<File key={item} type={'folder'} title={item}/>))}
+            {store.filteredDirectories.map(item => (<File key={item} type={'folder'} title={item}/>))}
         </div>
     )
 

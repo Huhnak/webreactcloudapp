@@ -3,7 +3,7 @@ import Files from "./Files";
 
 const StorageWrapper = (props) => {
     return (
-        <Files filteredDirectories={props.filteredDirectories}/>
+        <Files/>
     )
 }
 

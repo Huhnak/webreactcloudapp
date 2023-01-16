@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import config from '../axiosConfig';
 import GetDirectoriesTree from '../Handlers/Requests';
+import store from '../Redux/store';
 
 class LoginForm extends React.Component{
     constructor(props) {
@@ -12,7 +13,6 @@ class LoginForm extends React.Component{
         this.state = {
             username: '',
             password: '',
-            isLoggined: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -29,14 +29,14 @@ class LoginForm extends React.Component{
             password: this.state.password
         }
         axios.post("http://localhost:5164/users/authenticate", dataForLoggin ,{}).then((response)=>{
-            this.setState({isLoggined: true})
             localStorage.setItem("jwtToken", response.data.jwtToken)
-            this.props.setLoggined(true)
+            store.isLoggined = true
             config.headers={
                 'Authorization':`Bearer ${response.data.jwtToken}`
             }
-            GetDirectoriesTree({setDirectoriesTree:this.props.setDirectoriesTree})
-        }).catch((response)=>{alert("Wrong username or password" )})
+            GetDirectoriesTree()
+
+        })
 
         event.preventDefault();
 

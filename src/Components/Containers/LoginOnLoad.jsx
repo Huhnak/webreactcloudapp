@@ -5,21 +5,15 @@ import doesHttpOnlyCookieExist from "../../Handlers/CookieHandler";
 import config from "../../axiosConfig";
 import GetDirectoriesTree from '../../Handlers/Requests';
 
-const LoginOnLoadAsync = props => {
-
-    console.log(1)
-    if (!doesHttpOnlyCookieExist("refreshToken")){
+const LoginOnLoadAsync = (props) => {
+    if (!doesHttpOnlyCookieExist("refreshToken"))
         return
-    }
-    console.log(3)
-    LoginByRefreshToken({setLoggined: props.setLoggined})
+
+    LoginByRefreshToken()
     config.headers= {
         'Authorization':`Bearer ${localStorage.getItem('jwtToken')}`
     }
-    GetDirectoriesTree({setDirectoriesTree: props.setDirectoriesTree});
 
+    GetDirectoriesTree();
 }
-
-
-
 export default LoginOnLoadAsync

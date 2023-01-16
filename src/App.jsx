@@ -3,58 +3,34 @@ import LoginForm from './Components/LoginForm';
 import Header from './Components/Header'
 import MouseFolower from './Components/MouseFolower'
 import LoginOnLoadAsync from './Components/Containers/LoginOnLoad'
-import {connect} from 'react-redux'
+import { observer } from "mobx-react-lite";
+import store from './Redux/store';
 import StorageWrapper from './Components/StorageWrapper';
 
 
 const App = (props) => {
     const [isLoggined, setLoggined] = useState(false)
-    const [directoriesTree, setDirectoriesTree] = useState()
-    const [currentDirectory, setCurrentDirectory] = useState(null)
+    // const [directoriesTree, setDirectoriesTree] = useState()
+    // const [currentDirectory, setCurrentDirectory] = useState(null)
     const [filteredDirectories, setFilteredDirectories] = useState({})
     // Пытаюсь тут сделать вызовы асинхронно так как древо не может получаться на логине LoginOnLoadAsync
     useEffect(()=>{
-        let some = [
-            "123/",
-            "123/",
-            "my new directory/",
-            "Новая папка/",
-            "my new directory/ .gdfgdfg/",
-            "my new directory/123123/",
-            "my new directory/ .gdfgdfg /))))))/",
-            "my new directory/ .gdfgdfg /))))))/Новая папка/"
-        ]
-        console.log(some.filter((value, index, self)=> self.indexOf(value) === index))
         // debugger;
-        LoginOnLoadAsync({setLoggined: setLoggined, setDirectoriesTree: setDirectoriesTree})
-        setFilteredDirectories(getUniqueDirectories(currentDirectory))
+        LoginOnLoadAsync()
         // LoginOnLoad({setLoggined: setLoggined, setDirectoriesTree: setDirectoriesTree})
         // setFilteredDirectories(getUniqueDirectories(currentDirectory))
-    },[]);
+    },store.isLoggined);
     useEffect(()=>{
-        getUniqueDirectories(currentDirectory);
-    }, directoriesTree)
+        console.log("fdjohgjkfdjkfdghjkfdjkgfdhjk")
+    }, store.directoriesTree)
 
-    //    test\/dgdfgdf\/
-    function getUniqueDirectories(originDirectory){
-        let regex = null;
-        if (!originDirectory)
-            regex = new RegExp('^[\\wА-я_\\s\\-()\\[\\]{}.]+');
-        else
-            regex = new RegExp(`^${originDirectory}[\\wА-я_\\s\\-()\\[\\]{}.]+`);
-        const filteredMap = directoriesTree.Directories.map(item => regex.exec(item))
-        const filtered = filteredMap.map(item => item[0].trim()).filter((value, index, self)=> self.indexOf(value) === index);
-        const result = filtered.map(item => item.split('/').at(-1));
-        console.log(result);
-        return result
-    }
     return (
     <>
         <MouseFolower/>
-        <Header setLoggined={setLoggined} isLoggined={isLoggined} setCurrentDirectory={setCurrentDirectory} setDirectoriesTree={setDirectoriesTree}/>
-        {isLoggined ? <StorageWrapper filteredDirectories={filteredDirectories}/> : <LoginForm setLoggined={setLoggined} setDirectoriesTree={setDirectoriesTree}/>}
+        <Header/>
+        {store.isLoggined ? <StorageWrapper/> : <LoginForm/>}
     </>
     )
 }
 
-export default App;
+export default observer(App);
