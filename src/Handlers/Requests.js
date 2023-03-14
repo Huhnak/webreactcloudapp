@@ -7,8 +7,8 @@ import store from "../Redux/store";
 const GetDirectoriesTree = (props) => {
     axios.get("/filemanager/getDirectoriesTree", config).then((response)=>{
         console.log('Request GetDirectoriesTree >', response.data)
-        store.directoriesTree = response.data
-        store.filteredDirectories = store.getUniqueDirectories()
+        store.setDirectoriesTree(response.data)
+        store.setFilteredDirectories(store.getUniqueDirectories())
     })
 }
 export default GetDirectoriesTree

@@ -28,7 +28,7 @@ class LoginForm extends React.Component{
             username: this.state.username,
             password: this.state.password
         }
-        axios.post("http://localhost:5164/users/authenticate", dataForLoggin ,{}).then((response)=>{
+        axios.post("/users/authenticate", dataForLoggin ,config).then((response)=>{
             localStorage.setItem("jwtToken", response.data.jwtToken)
             store.isLoggined = true
             config.headers={

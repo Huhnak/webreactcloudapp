@@ -1,3 +1,5 @@
+import cookie from "cookielib";
+
 function doesHttpOnlyCookieExist(cookiename) {
     var d = new Date();
     d.setTime(d.getTime() + (1000));

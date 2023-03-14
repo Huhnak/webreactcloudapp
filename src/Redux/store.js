@@ -35,7 +35,15 @@ class MainStore{
     constructor() {
         makeAutoObservable(this)
     }
-
+    setCurrentDirectory(currentDirectory){
+        this.currentDirectory = currentDirectory
+    }
+    setFilteredDirectories(filteredDirectories){
+        this.filteredDirectories = filteredDirectories
+    }
+    setDirectoriesTree(directoriesTree){
+        this.directoriesTree = directoriesTree
+    }
     //    test\/dgdfgdf\/
     getUniqueDirectories(){
         let regex = null;
@@ -43,12 +51,16 @@ class MainStore{
             regex = new RegExp('^[\\wА-я_\\s\\-()\\[\\]{}.]+');
         else
             regex = new RegExp(`^${this.currentDirectory}[\\wА-я_\\s\\-()\\[\\]{}.]+`);
-        const filteredMap = this.directoriesTree.Directories.map(item => regex.exec(item))
+        const filteredMap = this.directoriesTree.Directories.map(item => regex.exec(item)).filter(Boolean)
         const filtered = filteredMap.map(item => item[0].trim()).filter((value, index, self) => self.indexOf(value) === index);
         const result = filtered.map(item => item.split('/').at(-1));
         return result
     }
-
+    getFilesCurrentDirectory(){
+        console.log(this.currentDirectory)
+        console.log(this.directoriesTree.Files)
+        console.log()
+    }
 }
 
 export default new MainStore;

@@ -9,10 +9,10 @@ import StorageWrapper from './Components/StorageWrapper';
 
 
 const App = (props) => {
-    const [isLoggined, setLoggined] = useState(false)
+    //const [isLoggined, setLoggined] = useState(false)
     // const [directoriesTree, setDirectoriesTree] = useState()
     // const [currentDirectory, setCurrentDirectory] = useState(null)
-    const [filteredDirectories, setFilteredDirectories] = useState({})
+    //const [filteredDirectories, setFilteredDirectories] = useState({})
     // Пытаюсь тут сделать вызовы асинхронно так как древо не может получаться на логине LoginOnLoadAsync
     useEffect(()=>{
         // debugger;
@@ -23,7 +23,6 @@ const App = (props) => {
     useEffect(()=>{
         console.log("fdjohgjkfdjkfdghjkfdjkgfdhjk")
     }, store.directoriesTree)
-
     return (
     <>
         <MouseFolower/>
