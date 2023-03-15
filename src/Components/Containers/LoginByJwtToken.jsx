@@ -1,9 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { config } from '../../axiosConfig'
+
 
 const LoginByJwtToken = (props) => {
-    axios.get("http://localhost:5164/users/is-authorized", {
+    axios.get("/users/is-authorized", {...config,
         headers:{
             'Authorization':`Bearer ${Cookies.get('jwtToken')}`
         }

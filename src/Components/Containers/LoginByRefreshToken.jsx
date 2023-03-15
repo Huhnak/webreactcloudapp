@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import config from "../../axiosConfig";
-import store from "../../Redux/store";
+import {config} from "../../axiosConfig";
+import store from "../../Mobx/store";
 
 const LoginByRefreshToken = props => {
     axios.post("/users/refresh-token", {

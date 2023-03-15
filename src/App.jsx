@@ -4,8 +4,8 @@ import Header from './Components/Header'
 import MouseFolower from './Components/MouseFolower'
 import LoginOnLoadAsync from './Components/Containers/LoginOnLoad'
 import { observer } from "mobx-react-lite";
-import store from './Redux/store';
-import StorageWrapper from './Components/StorageWrapper';
+import store from './Mobx/store';
+import StorageWrapper from './Components/Storage/StorageWrapper';
 
 
 const App = (props) => {
@@ -22,7 +22,7 @@ const App = (props) => {
     },store.isLoggined);
     useEffect(()=>{
         console.log("fdjohgjkfdjkfdghjkfdjkgfdhjk")
-    }, store.directoriesTree)
+    }, store.stringedDirectoriesTree)
     return (
     <>
         <MouseFolower/>

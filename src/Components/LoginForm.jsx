@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import config from '../axiosConfig';
-import GetDirectoriesTree from '../Handlers/Requests';
-import store from '../Redux/store';
+import {config} from '../axiosConfig';
+import {GetDirectoriesTree} from '../Handlers/Requests';
+import store from '../Mobx/store';
 
 class LoginForm extends React.Component{
     constructor(props) {
@@ -35,7 +35,6 @@ class LoginForm extends React.Component{
                 'Authorization':`Bearer ${response.data.jwtToken}`
             }
             GetDirectoriesTree()
-
         })
 
         event.preventDefault();

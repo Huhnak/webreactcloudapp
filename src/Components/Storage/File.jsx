@@ -2,7 +2,8 @@ import React from "react";
 import {AiFillFolder} from 'react-icons/ai'
 import {IoMdDocument } from 'react-icons/io'
 import {VscError} from 'react-icons/vsc'
-import store from "../Redux/store";
+import store from "../../Mobx/store";
+import { Tooltip } from "./Tooltip";
 
 
 const File = (props) => {
@@ -17,16 +18,17 @@ const File = (props) => {
         }
     }
     function handleClick(){
-        store.setCurrentDirectory(props.title+'/')
-        store.setFilteredDirectories(store.getUniqueDirectories())
-        store.getFilesCurrentDirectory()
+        if (props.type === 'folder')
+            store.pushCurrentDirectoryStack(props.title)
     }
     return(
         <div className="File" onClick={handleClick}>
             <div className="icon">
                 {renderSwitch(props.type)}
             </div>
-            <div className="title">{props.title}</div>
+            <Tooltip text={props.title}>
+                <div className="title">{props.title}</div>
+            </Tooltip>
         </div>
     )
 }
