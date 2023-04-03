@@ -1,8 +1,3 @@
-// const config = {
-//     baseURL: 'http://localhost:5164/',
-//     withCredentials: true
-// }
-
 const baseURL = 'http://localhost:5164/'
 export const config = {
     baseURL: baseURL,

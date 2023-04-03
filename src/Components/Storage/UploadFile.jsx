@@ -1,7 +1,7 @@
 import {React, useRef} from "react";
-import store from "../../Mobx/store";
+import mainStore from "../../Mobx/store";
 import { Tooltip } from "./Tooltip";
-import { GetDirectoriesTree, UploadFileOnServer } from "../../Handlers/Requests";
+import { UploadFileOnServer } from "../../Handlers/Requests";
 import { toJS } from "mobx";
 
 
@@ -16,10 +16,10 @@ export const UploadFile = (props) => {
             filesFormData.append('Files', event.target.files[i])
         }
         let fullPath = null
-        if (store.currentDirectoryStack.length === 0)
+        if (mainStore.currentDirectoryStack.length === 0)
             fullPath = '/'
         else
-            fullPath = toJS(store.currentDirectoryStack).join('/')+'/'
+            fullPath = toJS(mainStore.currentDirectoryStack).join('/')+'/'
         filesFormData.append('path', fullPath.toString())
         UploadFileOnServer(filesFormData)
         

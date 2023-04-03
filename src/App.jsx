@@ -1,33 +1,20 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import LoginForm from './Components/LoginForm';
 import Header from './Components/Header'
-import MouseFolower from './Components/MouseFolower'
-import LoginOnLoadAsync from './Components/Containers/LoginOnLoad'
+import LoginOnLoad from './Components/Containers/LoginOnLoad'
 import { observer } from "mobx-react-lite";
-import store from './Mobx/store';
+import mainStore from './Mobx/store';
 import StorageWrapper from './Components/Storage/StorageWrapper';
 
-
 const App = (props) => {
-    //const [isLoggined, setLoggined] = useState(false)
-    // const [directoriesTree, setDirectoriesTree] = useState()
-    // const [currentDirectory, setCurrentDirectory] = useState(null)
-    //const [filteredDirectories, setFilteredDirectories] = useState({})
-    // Пытаюсь тут сделать вызовы асинхронно так как древо не может получаться на логине LoginOnLoadAsync
     useEffect(()=>{
-        // debugger;
-        LoginOnLoadAsync()
-        // LoginOnLoad({setLoggined: setLoggined, setDirectoriesTree: setDirectoriesTree})
-        // setFilteredDirectories(getUniqueDirectories(currentDirectory))
-    },store.isLoggined);
-    useEffect(()=>{
-        console.log("fdjohgjkfdjkfdghjkfdjkgfdhjk")
-    }, store.stringedDirectoriesTree)
+        LoginOnLoad()
+    },[]);
     return (
+    // <MouseFolower/>
     <>
-        <MouseFolower/>
         <Header/>
-        {store.isLoggined ? <StorageWrapper/> : <LoginForm/>}
+        {mainStore.isLoggined ? <StorageWrapper/> : <LoginForm/>}
     </>
     )
 }

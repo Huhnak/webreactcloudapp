@@ -1,17 +1,19 @@
-import React from 'react'
 import axios from 'axios'
-import Cookies from 'js-cookie'
 import { config } from '../../axiosConfig'
+import mainStore from '../../Mobx/store'
 
 
 const LoginByJwtToken = (props) => {
+    console.log('LoginByJwtToken')
     axios.get("/users/is-authorized", {...config,
         headers:{
-            'Authorization':`Bearer ${Cookies.get('jwtToken')}`
+            'Authorization':`Bearer ${localStorage.getItem('jwtToken')}`
         }
     }).then((response)=>{
         console.log(response)
-        response.data === true && props.setLoggined(true)
+        if (response.data === true){
+            mainStore.setIsLoggined(true)
+        }
     })
 }
 export default LoginByJwtToken

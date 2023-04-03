@@ -1,11 +1,11 @@
 import React from "react";
 import {IoMdArrowBack} from 'react-icons/io'
-import store from "../../Mobx/store";
+import mainStore from "../../Mobx/store";
 
 
 const UpToDirectory = (props) => {
     function handleClick(){
-        store.popCurrentDirectoryStack()
+        mainStore.popCurrentDirectoryStack()
     }
     return(
         <div className="UpToDirectory" onClick={handleClick}>

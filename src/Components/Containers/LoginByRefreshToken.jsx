@@ -1,16 +1,16 @@
-import React from "react";
 import axios from "axios";
 import {config} from "../../axiosConfig";
-import store from "../../Mobx/store";
+import mainStore from "../../Mobx/store";
 
-const LoginByRefreshToken = props => {
+
+const LoginByRefreshToken = () => {
     axios.post("/users/refresh-token", {
     }, config).then((response)=>{
         localStorage.setItem('jwtToken', response.data.jwtToken)
-        store.isLoggined = true
+        mainStore.setIsLoggined(true);
     }).catch((reason)=>{
         console.log(reason)
-        store.isLoggined = false
+        mainStore.setIsLoggined(false);
     })
 }
 
