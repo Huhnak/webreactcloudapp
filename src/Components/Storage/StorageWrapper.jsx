@@ -23,7 +23,7 @@ const StorageWrapper = (props) => {
     return (
         <>
         <ProgressBar completed={(userSpace[1]/userSpace[0]*100).toFixed(2)} />
-        <p>{(userSpace[1]/8/1024/1024).toFixed(2)}Mb / {userSpace[0]/8/1024/1024}Mb</p>
+        <p>{(userSpace[1]/1024/1024).toFixed(2)}Mb / {userSpace[0]/1024/1024}Mb</p>
         <DirectoryPath/>
         <div className='StorageWrapper'>
             <div className="uploadFile-createFolder">

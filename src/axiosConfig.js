@@ -1,4 +1,4 @@
-export const baseURL = 'http://localhost:5164/'
+export const baseURL = 'http://185.100.24.195:5002'
 
 export const configWithBearer = () => {
     return{

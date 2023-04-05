@@ -9,9 +9,13 @@ export const CreateFolder = (props) => {
 
     function handleClick(){
         const dirName = prompt('Enter folder name')
-        if(!dirName)
+        if (!dirName)
             return
-        const fullPath = toJS(mainStore.currentDirectoryStack).join('/')+(mainStore.currentDirectoryStack>0 ? '/' : '')+ dirName + '/'
+        console.log(toJS(mainStore.currentDirectoryStack))
+        const fullPath = toJS(mainStore.currentDirectoryStack).join('/')+(mainStore.currentDirectoryStack.length ? '/' : '')+ dirName + '/'
+
+        console.log(fullPath)
+        console.log(dirName)
         CreateDirectory(fullPath)
     }
     return(

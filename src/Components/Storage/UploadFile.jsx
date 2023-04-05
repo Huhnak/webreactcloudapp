@@ -12,6 +12,8 @@ export const UploadFile = (props) => {
     }
     function onInputChange(event){
         let filesFormData = new FormData()
+        if (!event.target.files.length)
+            return  
         for (let i=0; i <event.target.files.length; i++){
             filesFormData.append('Files', event.target.files[i])
         }
