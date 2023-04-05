@@ -1,25 +1,16 @@
 import doesHttpOnlyCookieExist from "../../Handlers/CookieHandler";
-import {config} from "../../axiosConfig";
 import {GetDirectoriesTree} from '../../Handlers/Requests';
 import mainStore from "../../Mobx/store";
 import LoginByRefreshToken from "./LoginByRefreshToken";
 
-const LoginOnLoad = (props) => {
+const LoginOnLoad = async (props) => {
     if (!doesHttpOnlyCookieExist("refreshToken")){
         return
     }
-    new Promise((resolve, reject) => {
-        LoginByRefreshToken()
-        config.headers = {
-            'Authorization':`Bearer ${localStorage.getItem('jwtToken')}`
-        }
-        resolve()
-    }).then(()=>{
-        GetDirectoriesTree().then(()=>{
-            mainStore.setIsLoggined(true)
-        });
-    })
-    
-    
-}
+    await LoginByRefreshToken()
+    GetDirectoriesTree().then(()=>{
+        mainStore.setIsLoggined(true)
+    });
+    }
+
 export default LoginOnLoad

@@ -1,11 +1,10 @@
 import axios from "axios";
-import {config} from "../../axiosConfig";
+import {configWithBearer} from "../../axiosConfig";
 import mainStore from "../../Mobx/store";
 
 
 const LoginByRefreshToken = () => {
-    axios.post("/users/refresh-token", {
-    }, config).then((response)=>{
+    axios.post("/users/refresh-token", configWithBearer()).then( (response)=>{
         localStorage.setItem('jwtToken', response.data.jwtToken)
         mainStore.setIsLoggined(true);
     }).catch((reason)=>{

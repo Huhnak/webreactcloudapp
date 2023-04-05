@@ -1,13 +1,22 @@
-const baseURL = 'http://localhost:5164/'
-export const config = {
-    baseURL: baseURL,
-    withCredentials: true
-}
-export const configWithBearerFormData = {
-    baseURL: baseURL,
-    withCredentials: true,
-    headers:{
-        'Authorization':`Bearer ${localStorage.getItem('jwtToken')}`,
-        "Content-Type":"multipart/form-data"
+export const baseURL = 'http://localhost:5164/'
+
+export const configWithBearer = () => {
+    return{
+        baseURL: baseURL,
+        withCredentials: true,
+        headers:{
+            'Authorization':`Bearer ${localStorage.getItem('jwtToken')}`
+        }
     }
+}
+
+export const configWithBearerFormData = () => {
+    return {
+        baseURL: baseURL,
+        withCredentials: true,
+        headers:{
+            'Authorization':`Bearer ${localStorage.getItem('jwtToken')}`,
+            "Content-Type":"multipart/form-data"
+    }
+}
 }

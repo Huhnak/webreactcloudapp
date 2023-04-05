@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import axios from 'axios';
-import {config} from '../axiosConfig';
+import {configWithBearer} from '../axiosConfig';
 import {GetDirectoriesTree} from '../Handlers/Requests';
 import mainStore from '../Mobx/store';
 import { observer } from 'mobx-react-lite';
@@ -23,12 +23,8 @@ const LoginForm = (props) => {
             username: username,
             password: password
         }
-        axios.post("/users/authenticate", dataForLoggin ,config).then((response)=>{
+        axios.post("/users/authenticate", dataForLoggin ,configWithBearer()).then((response)=>{
             localStorage.setItem("jwtToken", response.data.jwtToken)
-            
-            config.headers={
-                'Authorization':`Bearer ${response.data.jwtToken}`
-            }
         }).then(()=>{
             GetDirectoriesTree().then(()=>{mainStore.setIsLoggined(true)})
         })

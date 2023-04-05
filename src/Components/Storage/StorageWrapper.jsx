@@ -12,7 +12,6 @@ const StorageWrapper = (props) => {
         <>
         <DirectoryPath/>
         <div className='StorageWrapper'>
-            
             <div className="uploadFile-createFolder">
                 <CreateFolder/>
                 <UploadFile/>
