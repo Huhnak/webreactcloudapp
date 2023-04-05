@@ -4,7 +4,21 @@ const mainStore = makeAutoObservable({
     stringedDirectoriesTree : null,
     currentDirectoryStack : [],
     isLoggined : false,
-    
+
+    isDirectoryEmpty(directoryName){
+        let currentDirectoryStackClone = structuredClone(toJS(this.currentDirectoryStack))
+        currentDirectoryStackClone
+            ? currentDirectoryStackClone.push(directoryName)
+            : currentDirectoryStackClone = [directoryName]
+        
+        let currentDirectoriesTree = structuredClone(toJS(this.stringedDirectoriesTree))
+        currentDirectoryStackClone.forEach(element => {
+            currentDirectoriesTree = currentDirectoriesTree['directory'][element]
+        })
+        if (Object.keys(currentDirectoriesTree['directory']).length || Object.keys(currentDirectoriesTree['file']).length)
+            return false
+        return true
+    },
     setIsLoggined(isLoggined){
         this.isLoggined = isLoggined
     },

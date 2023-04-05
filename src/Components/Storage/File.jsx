@@ -1,14 +1,19 @@
 import React from "react";
 import {AiFillFolder} from 'react-icons/ai'
 import {IoMdDocument} from 'react-icons/io'
+import {HiPencil, HiDownload} from 'react-icons/hi'
 import {VscError} from 'react-icons/vsc'
 import mainStore from "../../Mobx/store";
 import { Tooltip } from "./Tooltip";
 import { FileContextMenu } from "./FileContextMenu";
+import {MdDelete} from 'react-icons/md'
+import { useFileContextMenu } from "../../Hooks/FileContextMenu";
+
 
 
 
 const File = (props) => {
+    const [fileDownloadHandleClick, fileDeleteHandleClick ,fileRenameHandleClick, folderRenameHandleClick, folderDeleteHandleClick] = useFileContextMenu()
     function renderSwitch(param) {
         switch(param){
             case 'file':
@@ -36,16 +41,29 @@ const File = (props) => {
     return(
         <div className={classNameSwitch(props.type)}>
             {props.type === 'file' &&
-            <FileContextMenu fileName={props.title}>
+            <FileContextMenu
+                buttons={(<>
+                    <HiDownload onClick={()=>{fileDownloadHandleClick(props.title)}}/>
+                    <HiPencil onClick={()=>{fileRenameHandleClick(props.title)}}/>
+                    <MdDelete  onClick={()=>{fileDeleteHandleClick(props.title)}}/>
+                    </>)}
+            >
                 <div className="icon">
                     {renderSwitch(props.type)}
                 </div>
             </FileContextMenu>
             }
             {props.type === 'folder' &&
-                <div className="icon" onClick={handleClick}>
-                    {renderSwitch(props.type)}
-                </div>
+                <FileContextMenu
+                    buttons={(<>
+                        <HiPencil onClick={()=>{folderRenameHandleClick(props.title)}}/>
+                        <MdDelete onClick={()=>{folderDeleteHandleClick(props.title)}}/>
+                    </>)}
+                >
+                    <div className="icon" onClick={handleClick}>
+                        {renderSwitch(props.type)}
+                    </div>
+                </FileContextMenu>
             }
             <Tooltip text={props.title}>
                 <div className="title">{props.title}</div>

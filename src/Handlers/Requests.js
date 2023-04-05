@@ -73,3 +73,49 @@ export const RenameFile = async (fileName, directoryPath, newFileName) => {
         console.log('RenameFile catch >', response.data)
     })
 }
+export const RenameDirectory = async (newDirectoryName, directoryPath) => {
+    var formData = new FormData()
+    formData.append('DirectoryPath', directoryPath)
+    formData.append('NewDirectoryName', newDirectoryName)
+    await axios.post('/filemanager/renameDirectory', formData, configWithBearerFormData()).then((response) => {
+        console.log('RenameDirectory >', response.data)
+        GetDirectoriesTree()
+    }).catch((response)=>{
+        alert(response.data)
+        console.log('RenameDirectory catch >', response.data)
+    })
+}
+export const DeleteDirectoryNotRecursively = async (directoryPath) => {
+    var formData = new FormData()
+    formData.append('DirectoryPath', directoryPath)
+    await axios.post('/filemanager/deleteDirectoryNotRecursively', formData, configWithBearerFormData()).then((response) => {
+        console.log('DeleteDirectoryNotRecursively >', response.data)
+        GetDirectoriesTree()
+    }).catch((response)=>{
+        alert(response.data)
+        console.log('DeleteDirectoryNotRecursively catch >', response.data)
+    })
+}
+export const DeleteDirectoryRecursively = async (directoryPath) => {
+    var formData = new FormData()
+    formData.append('DirectoryPath', directoryPath)
+    await axios.post('/filemanager/deleteDirectoryRecursively', formData, configWithBearerFormData()).then((response) => {
+        console.log('DeleteDirectoryRecursively >', response.data)
+        GetDirectoriesTree()
+    }).catch((response)=>{
+        alert(response.data)
+        console.log('DeleteDirectoryRecursively catch >', response.data)
+    })
+}
+export const GetUserSpace = async () => {
+    let result
+    await axios.get('/filemanager/userSpace', configWithBearer())
+    .then((response) => {
+        result = response.data
+        console.log('GetUserSpace >', response.data)
+    }).catch((response)=>{
+        alert(response.data)
+        console.log('GetUserSpace catch >', response.data)
+    })
+    return result
+}
