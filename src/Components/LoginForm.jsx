@@ -25,6 +25,7 @@ const LoginForm = (props) => {
         }
         axios.post("/users/authenticate", dataForLoggin ,configWithBearer()).then((response)=>{
             localStorage.setItem("jwtToken", response.data.jwtToken)
+            console.log(response)
         }).then(()=>{
             GetDirectoriesTree().then(()=>{mainStore.setIsLoggined(true)})
         })
