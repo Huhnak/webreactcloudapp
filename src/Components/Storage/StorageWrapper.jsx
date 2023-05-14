@@ -22,7 +22,10 @@ const StorageWrapper = (props) => {
     
     return (
         <>
-        <ProgressBar completed={(userSpace[1]/userSpace[0]*100).toFixed(2)} />
+        <ProgressBar
+            completed={Number((userSpace[1]/userSpace[0]*100).toFixed(2))}
+            bgColor="#5792C5"
+        />
         <p>{(userSpace[1]/1024/1024).toFixed(2)}Mb / {userSpace[0]/1024/1024}Mb</p>
         <DirectoryPath/>
         <div className='StorageWrapper'>

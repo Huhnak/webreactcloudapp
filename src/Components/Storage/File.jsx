@@ -10,10 +10,14 @@ import {MdDelete} from 'react-icons/md'
 import { useFileContextMenu } from "../../Hooks/FileContextMenu";
 
 
-
-
 const File = (props) => {
-    const [fileDownloadHandleClick, fileDeleteHandleClick ,fileRenameHandleClick, folderRenameHandleClick, folderDeleteHandleClick] = useFileContextMenu()
+    const [
+        fileDownloadHandleClick,
+        fileDeleteHandleClick,
+        fileRenameHandleClick,
+        folderRenameHandleClick,
+        folderDeleteHandleClick
+    ] = useFileContextMenu()
     function renderSwitch(param) {
         switch(param){
             case 'file':

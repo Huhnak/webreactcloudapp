@@ -3,7 +3,7 @@ import mainStore from "../Mobx/store";
 
 
 const Header = (props) => {
-    const [title] = useState("My first react app");
+    const [title] = useState("Cloud");
     const handleClick = () => {
         mainStore.clearCurrentDirectoryStack();
         mainStore.setStringedDirectoriesTree(null);

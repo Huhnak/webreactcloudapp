@@ -27,10 +27,10 @@ export const UploadFile = (props) => {
         
     }
     return(
-        <Tooltip text={'Upload file'}>
+        <Tooltip text={'Upload files'}>
             <input type='file' multiple id='file' ref={inputFile} style={{display:'none'}} onChange ={onInputChange}/>
             <div className="UploadFile" onClick={handleClick}>
-                <p>Upload file</p>
+                <p>Upload files</p>
             </div>
         </Tooltip>
         
